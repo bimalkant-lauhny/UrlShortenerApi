@@ -24,12 +24,12 @@ exports.findMaxIndex = function (db, callback) {
             'index': 1 
         }},{
         $group: {
-            '_id': '$url',
-            'max': {$max: 1}
+            '_id': null,
+            'max': {$max: "$index"}
         }}
     ], function (err, result) {
         assert.equal(null, err);
         console.log('Completed aggregation max search: ', result);  
-        callback(result);
+        callback(null, result[0].max);
     });
 };
